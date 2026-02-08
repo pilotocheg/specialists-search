@@ -4,10 +4,15 @@ export type Subject = {
   sequence: number;
 };
 
+/**
+ * 1 = M, 2 = F
+ */
+export type Sex = 1 | 2;
+
 export type Specialist = {
   userId: string;
   name: string;
-  sex: 1 | 2; // 1 = M, 2 = F
+  sex: Sex;
   age: number;
   birthDate: string;
   photoUrl: string;

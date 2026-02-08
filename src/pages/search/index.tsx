@@ -6,6 +6,8 @@ import { SpecialistsList } from 'components/specialists-list';
 import { useAppDispatch } from 'store/hooks';
 import { setSpecialists } from 'store/specialists';
 import { getSearchParams } from './helpers';
+import { LoadMoreButton, PageContainer } from './styles';
+import { Button } from 'components/commons/button';
 
 export default function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,9 +25,10 @@ export default function SearchPage() {
   }, []);
 
   return (
-    <div>
+    <PageContainer>
       <Filters />
       <SpecialistsList />
-    </div>
+      <LoadMoreButton>Показать еще</LoadMoreButton>
+    </PageContainer>
   );
 }

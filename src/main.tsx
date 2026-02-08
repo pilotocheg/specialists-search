@@ -1,15 +1,21 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 
-import './index.css';
+import 'modern-normalize/modern-normalize.css';
+
 import App from './App.tsx';
-import { store } from './store/store.ts';
+import { store } from './store';
+import { theme, GlobalStyle } from './styles';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
     </Provider>
   </StrictMode>,
 );
