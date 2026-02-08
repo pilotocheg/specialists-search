@@ -10,7 +10,7 @@ export const ImageContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.textSecondary};
 `;
 
-export const Image = styled.img`
+export const StyledImage = styled.img`
   width: 100%;
   height: 100%;
 `;

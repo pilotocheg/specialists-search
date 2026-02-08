@@ -1,6 +1,12 @@
 import { specialistsSlice } from './slice';
 
-export const { setSpecialists } = specialistsSlice.actions;
-export const { selectSpecialists } = specialistsSlice.selectors;
+export { getSpecialists } from './thunks';
+
+export const {
+  selectSpecialists,
+  selectTotalCount,
+  selectHasMore,
+  selectLoading,
+} = specialistsSlice.selectors;
 
 export default specialistsSlice;

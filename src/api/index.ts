@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 
 import type {
   GetSpecialistsParams,
@@ -8,34 +8,24 @@ import type {
 
 axios.defaults.baseURL = 'https://specialists-search-api.onrender.com/api';
 
-interface FetchOptions {
-  errorTitle: string;
-  params?: Record<string, unknown>;
-}
-
 const makeFetch = async <T>(
   url: string,
-  { errorTitle, ...options }: FetchOptions,
+  options?: AxiosRequestConfig,
 ): Promise<T> => {
   try {
     const response = await axios.get<T>(url, options);
     return response.data;
   } catch (error) {
     // TODO: Implement proper error handling
-    console.error(`${errorTitle}:`, error);
+    console.error('Network error:', error);
     throw error;
   }
 };
 
-export const fetchSpecialists = (
-  params: GetSpecialistsParams,
-): Promise<SpecialistsResponse> =>
-  makeFetch('/specialists', {
-    errorTitle: 'Error fetching specialists',
+export const fetchSpecialists = (params: GetSpecialistsParams) =>
+  makeFetch<SpecialistsResponse>('/specialists', {
     params,
-  });
+  }).then((response) => response.data);
 
-export const fetchSubjects = (): Promise<SubjectsResponse> =>
-  makeFetch('/subjects', {
-    errorTitle: 'Error fetching subjects',
-  });
+export const fetchSubjects = () =>
+  makeFetch<SubjectsResponse>('/subjects').then((response) => response.data);

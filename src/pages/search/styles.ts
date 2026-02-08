@@ -1,15 +1,11 @@
 import styled from 'styled-components';
-import { Button } from 'components/commons/button';
 
 export const PageContainer = styled.div`
-  margin: 16px auto 40px;
+  min-height: 100vh;
+  margin: 0 auto;
   max-width: 1096px;
-  padding: 0 20px;
+  padding: 16px 20px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const LoadMoreButton = styled(Button)`
-  margin-top: 32px;
 `;

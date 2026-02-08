@@ -1,3 +1,4 @@
+import { Button } from 'components/commons/button';
 import styled from 'styled-components';
 
 export const ListContainer = styled.div`
@@ -9,4 +10,15 @@ export const ListContainer = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 40px 20px;
   }
+`;
+
+export const NoResultsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`;
+
+export const LoadMoreButton = styled(Button)`
+  margin-top: 32px;
 `;

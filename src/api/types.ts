@@ -43,9 +43,11 @@ export type SubjectsResponse = {
   data: Subject[];
 };
 
+export type SpecialistsResponseData = {
+  items: Specialist[];
+  totalCount: number;
+};
+
 export type SpecialistsResponse = {
-  data: {
-    items: Specialist[];
-    totalCount: number;
-  };
+  data: SpecialistsResponseData;
 };

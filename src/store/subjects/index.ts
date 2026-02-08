@@ -1,6 +1,6 @@
 import { subjectsSlice } from './slice';
 
-export const { setSubjects } = subjectsSlice.actions;
+export { getSubjects } from './thunks';
 export const { selectSubjects } = subjectsSlice.selectors;
 
 export default subjectsSlice;
