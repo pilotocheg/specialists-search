@@ -1,73 +1,78 @@
-# React + TypeScript + Vite
+# Specialists Search
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web app for searching and browsing specialists (psychologists) with filters and pagination. Built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Search & filters** — Filter by sex, age range, topic (subject), qualification (consultant / sexologist / coach), and rating
+- **URL-driven state** — Filter values are synced with URL search params so results are shareable and bookmarkable
+- **Specialist cards** — Photo, name, rating, subject, online status, last activity
+- **Pagination** — Loads specialists in pages of 12; empty state when no results
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** + **TypeScript**
+- **Vite** (Rolldown)
+- **Redux Toolkit** — specialists and subjects data
+- **React Router 7** — routing and search params
+- **React Hook Form** — filter form
+- **styled-components** — styling
+- **Axios** — API client
+- **date-fns** — date formatting
+- **react-hot-toast** — notifications
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js (recommended: LTS)
+- npm
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Install and run
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:5173](http://localhost:5173).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+### Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| `npm run dev`     | Start dev server (HMR)   |
+| `npm run build`   | Type-check and build     |
+| `npm run preview` | Preview production build |
+| `npm run lint`    | Run ESLint               |
+
+## API
+
+The app uses a backend API (default base URL: `https://specialists-search-api.onrender.com/api`):
+
+- `GET /specialists` — paginated specialists with optional filter query params
+- `GET /subjects` — list of topics/subjects for the filter
+
+Note: The API is hosted on Render.com and may take up to 1 minute to respond.
+
+## Project structure
+
 ```
+src/
+├── api/              # API client and types
+├── components/       # UI components
+│   ├── commons/     # Button, Select, Loader
+│   ├── empty-state/
+│   ├── filters/     # Search filters form
+│   └── specialists-list/
+├── constants/
+├── helpers/          # URL/search params helpers
+├── pages/search/     # Main search page
+├── store/            # Redux slices (specialists, subjects)
+├── styles/           # Global styles and theme
+└── routes.tsx
+```
+
+## License
+
+Private project.
