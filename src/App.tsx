@@ -1,14 +1,14 @@
-import { BrowserRouter } from 'react-router';
+import { HashRouter } from 'react-router';
 import { Toaster } from 'react-hot-toast';
 
 import AppRoutes from './routes';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppRoutes />
       <Toaster position="bottom-right" />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
