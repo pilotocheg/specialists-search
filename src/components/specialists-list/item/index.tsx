@@ -3,7 +3,6 @@ import type { Specialist } from 'api/types';
 import {
   Container,
   ContentContainer,
-  Image,
   ImageContainer,
   InfoText,
   LastOnlineText,
