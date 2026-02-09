@@ -17,6 +17,7 @@ export const Rating = styled.div<{ isNew: boolean }>`
   text-align: center;
   letter-spacing: 0%;
   padding-top: ${({ isNew }) => (isNew ? '7px' : '6px')};
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
   span {
     font-size: ${({ isNew }) => (isNew ? '8px' : '16px')};

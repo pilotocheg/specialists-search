@@ -18,6 +18,7 @@ import {
   getLastOnlineText,
 } from './helpers';
 import { ListItemRating } from './components/rating';
+import { ListItemImage } from './components/image';
 
 type Props = {
   specialist: Specialist;
@@ -42,7 +43,7 @@ export function SpecialistsListItem(props: Props) {
     <Container>
       <ImageContainer>
         <ListItemRating rating={rating} />
-        <Image src={photoUrl} alt={name} />
+        <ListItemImage src={photoUrl} alt={name} sex={sex} />
       </ImageContainer>
       <ContentContainer>
         <NameContainer>
