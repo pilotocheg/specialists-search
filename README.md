@@ -2,6 +2,9 @@
 
 A web app for searching and browsing specialists (psychologists) with filters and pagination. Built with React, TypeScript, and Vite.
 
+<img width="782" height="617" alt="Screenshot 2026-02-09 at 15 57 26" src="https://github.com/user-attachments/assets/f0f85c85-6563-43a6-8210-952e14d7f26f" />
+
+
 ## Features
 
 - **Search & filters** — Filter by sex, age range, topic (subject), qualification (consultant / sexologist / coach), and rating
