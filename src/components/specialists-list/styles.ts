@@ -1,5 +1,5 @@
-import { Button } from 'components/commons/button';
 import styled from 'styled-components';
+import { Button } from 'components/commons/button';
 
 export const ListContainer = styled.div`
   display: grid;
@@ -21,4 +21,8 @@ export const NoResultsContainer = styled.div`
 
 export const LoadMoreButton = styled(Button)`
   margin-top: 32px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    margin-top: 40px;
+  }
 `;

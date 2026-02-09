@@ -24,7 +24,7 @@ export const Description = styled.p`
   font-size: 14px;
   font-weight: 500;
   line-height: 1.6;
-  max-width: 200px;
+  max-width: 180px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: 20px;

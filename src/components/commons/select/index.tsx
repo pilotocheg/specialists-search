@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef } from 'react';
+import { useId, type ComponentPropsWithoutRef } from 'react';
 import { FieldGroup, Label, StyledSelect } from './styles';
 
 export type SelectOption = {
@@ -12,8 +12,10 @@ type Props = ComponentPropsWithoutRef<typeof StyledSelect> & {
 };
 
 export function Select({ label, options, ...selectProps }: Props) {
+  const id = useId();
+
   const select = (
-    <StyledSelect {...selectProps}>
+    <StyledSelect id={id} {...selectProps}>
       {options.map(({ value, label: optionLabel }) => (
         <option key={value || 'any'} value={value}>
           {optionLabel}
@@ -25,7 +27,7 @@ export function Select({ label, options, ...selectProps }: Props) {
   if (label != null) {
     return (
       <FieldGroup>
-        <Label>{label}</Label>
+        <Label htmlFor={id}>{label}</Label>
         {select}
       </FieldGroup>
     );

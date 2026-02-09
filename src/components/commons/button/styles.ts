@@ -7,6 +7,9 @@ export const StyledButton = styled.button`
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.textPrimaryLight};
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   transition: opacity 0.3s ease-in-out;
 
@@ -21,5 +24,11 @@ export const StyledButton = styled.button`
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 312px;
+    height: 52px;
+    font-size: 20px;
   }
 `;

@@ -1,18 +1,18 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  button {
+  button, input, select {
     cursor: pointer;
     border: none;
     outline: none;
     background-color: transparent;
   }
 
-  p, h1, h2, h3, h4, h5, h6, button {
+  p, h1, h2, h3, h4, h5, h6, button, input, select {
     margin: 0;
     padding: 0;
-    letter-spacing: 0%;
-    line-height: 1;
+    letter-spacing: inherit;
+    line-height: inherit;
   }
 
   body {

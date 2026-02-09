@@ -1,13 +1,15 @@
 import styled from 'styled-components';
+import { theme } from 'styles/theme';
 
-export const Loader = styled.div`
-  width: 60px;
+export const Loader = styled.div<{ size?: number; color?: string }>`
+  width: ${({ size }) => size ?? 60}px;
+
   aspect-ratio: 2;
   --_g: no-repeat
     radial-gradient(
       circle closest-side,
-      ${({ theme }) => theme.colors.primary} 90%,
-      ${({ theme }) => theme.colors.primary}00
+      ${({ color }) => color ?? theme.colors.primary} 90%,
+      ${({ color }) => color ?? theme.colors.primary}00
     );
   background:
     var(--_g) 0% 50%,

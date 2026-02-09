@@ -1,100 +1,107 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router';
 
 import { Select } from 'components/commons/select';
-import type { FilterFormValues } from 'pages/search/helpers';
+import type { FilterFormValues } from 'components/filters/form';
+import { Label } from 'components/commons/select/styles';
 import {
-  defaultFilterValues,
-  searchParamsToFilters,
-  filtersToSearchParams,
   SEX_OPTIONS,
   AGE_FROM_OPTIONS,
   AGE_TO_OPTIONS,
   RATING_OPTIONS,
   QUALIFICATION_OPTIONS,
-} from 'pages/search/helpers';
-import { FiltersForm, FieldGroup, Label, AgeRow, SubmitButton } from './styles';
+} from './constants';
+import { defaultValues } from './form';
+import {
+  FiltersForm,
+  AgeRow,
+  SubmitButton,
+  AgeFieldGroup,
+  FiltersRow,
+} from './styles';
 import { useSubjectsLoader } from './hooks';
-
-const AGE_FROM_OPTIONS_WITH_LABEL = [
-  { value: '', label: 'От' },
-  ...AGE_FROM_OPTIONS.map((age) => ({
-    value: String(age),
-    label: String(age),
-  })),
-] as const;
-
-const AGE_TO_OPTIONS_WITH_LABEL = [
-  { value: '', label: 'До' },
-  ...AGE_TO_OPTIONS.map((age) => ({ value: String(age), label: String(age) })),
-] as const;
+import { filtersToSearchParams, searchParamsToFilters } from './helpers';
+import { useRootSelector } from 'store/hooks';
+import { selectLoading } from 'store/specialists';
 
 export function Filters() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { subjects } = useSubjectsLoader();
+  const specialistsLoading = useRootSelector(selectLoading);
 
   const { register, handleSubmit, reset } = useForm<FilterFormValues>({
-    defaultValues: defaultFilterValues,
+    defaultValues,
   });
 
   useEffect(() => {
-    reset(searchParamsToFilters(searchParams));
+    reset(searchParamsToFilters(searchParams, defaultValues));
   }, [searchParams, reset]);
 
   const onSubmit = (values: FilterFormValues) => {
-    setSearchParams(filtersToSearchParams(values), { replace: true });
+    setSearchParams(filtersToSearchParams(values), {
+      replace: true,
+    });
   };
 
-  const subjectOptions = [
-    { value: '', label: 'Все темы' },
-    ...subjects.map((s) => ({ value: String(s.id), label: s.name })),
-  ];
+  const subjectOptions = useMemo(
+    () => [
+      { value: '', label: 'Все темы' },
+      ...subjects.map((s) => ({ value: String(s.id), label: s.name })),
+    ],
+    [subjects],
+  );
 
   return (
     <FiltersForm onSubmit={handleSubmit(onSubmit)}>
-      <Select
-        label="Я ищу психолога"
-        options={SEX_OPTIONS}
-        {...register('sex')}
-      />
+      <FiltersRow>
+        <Select
+          label="Я ищу психолога"
+          options={SEX_OPTIONS}
+          {...register('sex')}
+        />
 
-      <FieldGroup>
-        <Label>В возрасте</Label>
-        <AgeRow>
-          <Select
-            options={AGE_FROM_OPTIONS_WITH_LABEL}
-            className="age-select"
-            {...register('ageFrom')}
-          />
-          <Select
-            options={AGE_TO_OPTIONS_WITH_LABEL}
-            className="age-select"
-            {...register('ageTo')}
-          />
-        </AgeRow>
-      </FieldGroup>
+        <AgeFieldGroup>
+          <Label>В возрасте</Label>
+          <AgeRow>
+            <Select
+              label="От"
+              options={AGE_FROM_OPTIONS}
+              {...register('ageFrom')}
+            />
+            <Select
+              label="До"
+              options={AGE_TO_OPTIONS}
+              {...register('ageTo')}
+            />
+          </AgeRow>
+        </AgeFieldGroup>
 
-      <Select
-        label="Тема"
-        options={subjectOptions}
-        disabled={!subjects.length}
-        {...register('subjectId')}
-      />
+        <Select
+          label="Тема"
+          options={subjectOptions}
+          disabled={!subjects.length}
+          {...register('subjectId')}
+        />
+      </FiltersRow>
 
-      <Select
-        label="Квалификация"
-        options={QUALIFICATION_OPTIONS}
-        {...register('profSpeciality')}
-      />
+      <FiltersRow>
+        <Select
+          label="Квалификация"
+          options={QUALIFICATION_OPTIONS}
+          {...register('profSpeciality')}
+        />
 
-      <Select
-        label="Рейтинг"
-        options={RATING_OPTIONS}
-        {...register('rating')}
-      />
+        <Select
+          label="Рейтинг"
+          options={RATING_OPTIONS}
+          {...register('rating')}
+        />
 
-      <SubmitButton type="submit">Показать анкеты</SubmitButton>
+        <SubmitButton disabled={specialistsLoading} type="submit">
+          Показать анкеты
+        </SubmitButton>
+      </FiltersRow>
     </FiltersForm>
   );
 }
